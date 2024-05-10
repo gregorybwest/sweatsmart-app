@@ -29,8 +29,7 @@ function App() {
         <button
           onClick={() =>
             userCall()
-            })
-          }
+            }
         >
           count is {count}
         </button>
