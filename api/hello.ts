@@ -1,12 +1,12 @@
-const express = require("express");
-const app = express();
+import type { NextApiRequest, NextApiResponse } from "next";
 
-app.get("/api", (req, res) => res.send("Express on Vercel"));
+type ResponseData = {
+  message: string;
+};
 
-app.get("/hello", (req, res) => res.send("Express on Vercel hello"));
-
-app.get("/api/hello", (req, res) => res.send("Express on Vercel api/hello"));
-
-app.listen(3000, () => console.log("Server ready on port 3000."));
-
-module.exports = app;
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) {
+  res.status(200).json({ message: "Hello from Next.js!" });
+}
