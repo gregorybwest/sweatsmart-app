@@ -7,7 +7,9 @@ function App() {
   const [count, setCount] = useState(0);
 
   const userCall = async () => {
-    const response = await fetch(process.env.VERCEL_URL + "/api/users/1");
+    const URLCall = process.env.VERCEL_URL + "/api/users/1";
+    console.log('URLCall', URLCall);
+    const response = await fetch(URLCall);
     const data = await response.json();
     console.log(data);
   };
@@ -26,9 +28,7 @@ function App() {
       <div className="card">
         <button
           onClick={() =>
-            setCount((count) => {
-              count + 1;
-              userCall;
+            userCall()
             })
           }
         >
