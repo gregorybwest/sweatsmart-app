@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count] = useState(0);
 
   const userCall = async () => {
     const URLCall = process.env.VERCEL_URL + "/api/users/1";
