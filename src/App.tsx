@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import axios from 'axios'
 import './App.css'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={async () => {console.log(await axios.get("https://sweatsmart-be.vercel.app/strava_auth?poop=stefan"))}}>CLICK ME</button>
     </>
   )
 }
