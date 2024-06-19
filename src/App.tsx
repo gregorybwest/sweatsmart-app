@@ -1,13 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-// import axios from 'axios'
+import axios from 'axios'
 import './App.css'
+
+function sendCode(code: string) {
+  axios.get(`https://sweatsmart-be.vercel.app/strava_auth?code=${code}`);
+}
 
 function App() {
   const [count, setCount] = useState(0)
   const params = new URLSearchParams(document.location.search);
   const code = params.get("code");
+
+  useEffect(() => {
+    if (code) {
+      sendCode(code);
+    }
+  }, [code]);
 
   return (
     <>
