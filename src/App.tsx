@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import axios from 'axios'
+// import axios from 'axios'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const params = new URLSearchParams(document.location.search);
+  const code = params.get("code");
 
   return (
     <>
@@ -29,7 +31,8 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <button onClick={async () => {console.log(await axios.get("https://sweatsmart-be.vercel.app/strava_auth?poop=stefan"))}}>CLICK ME</button>
+      <button onClick={async () => {window.location.href = 'https://www.strava.com/oauth/authorize?client_id=120919&redirect_uri=https://sweatsmart-app.vercel.app&response_type=code&approval_prompt=auto&scope=activity:write,activity:read';}}>CLICK ME</button>
+      <p>{code}</p>
     </>
   )
 }
