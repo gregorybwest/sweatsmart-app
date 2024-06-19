@@ -4,8 +4,9 @@ import viteLogo from '/vite.svg'
 import axios from 'axios'
 import './App.css'
 
-function sendCode(code: string) {
-  axios.get(`https://sweatsmart-be.vercel.app/strava_auth?code=${code}`);
+async function sendCode(code: string) {
+  const data = await axios.get(`https://sweatsmart-be.vercel.app/strava_auth?code=${code}`);
+  console.log(data);
 }
 
 function App() {
