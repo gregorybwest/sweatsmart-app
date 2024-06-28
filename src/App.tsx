@@ -6,8 +6,7 @@ import './App.css'
 
 async function sendCode(code: string) {
   const data = await axios.get(`https://sweatsmart-be.vercel.app/strava_auth?code=${code}`);
-  console.log(data);
-  console.log(data.data.athlete.id, "fart");
+  console.log(data["data"]);
 }
 
 function App() {
