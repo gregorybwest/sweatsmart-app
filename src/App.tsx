@@ -42,7 +42,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <button onClick={async () => {window.location.href = 'https://www.strava.com/oauth/authorize?client_id=120919&redirect_uri=https://sweatsmart-app.vercel.app&response_type=code&approval_prompt=auto&scope=activity:write,activity:read';}}>CLICK ME</button>
+      <button onClick={async () => {window.location.href = 'https://www.strava.com/oauth/authorize?client_id=120918&redirect_uri=https://sweatsmart-app.vercel.app&response_type=code&approval_prompt=auto&scope=activity:write,activity:read';}}>CLICK ME</button>
       <p>{code}</p>
     </>
   )
