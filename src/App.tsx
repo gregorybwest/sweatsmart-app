@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import sweatSmartLogo from "/SweatSmartLogo.png";
+// import sweatSmartLogo from "/SweatSmartLogo.png";
+import sweatSmartLogo from "/sweatsmart-logo.svg";
 import stravaConnectBtn from "/strava_api_logos/btn_strava_connectwith_orange/btn_strava_connectwith_orange.svg";
 import axios from "axios";
 import "./App.css";
