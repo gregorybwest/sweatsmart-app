@@ -29,7 +29,7 @@ function Workouts() {
   const params = new URLSearchParams(document.location.search);
   const code = params.get("code");
   const [data, setData] = useState({});
-  
+  console.log(data);
 
 
   useEffect(() => {
