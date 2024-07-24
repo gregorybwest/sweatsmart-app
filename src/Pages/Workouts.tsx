@@ -65,7 +65,7 @@ function Workouts() {
           id="strava-connect-btn"
           onClick={async () => {
             window.location.href = `https://www.strava.com/oauth/authorize?client_id=120918&redirect_uri=${
-              import.meta.env.VITE_REDIRECT_URI
+              import.meta.env.VITE_VERCEL_URL
             }&response_type=code&approval_prompt=auto&scope=activity:write,activity:read`;
           }}
         ></button>
