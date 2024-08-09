@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import sweatSmartLogo from "/sweatsmart-logo.svg";
 import axios from "axios";
+import { WorkoutCard } from "../Components/WorkoutCard";
 
 async function sendCode(code: string) {
   try {
@@ -36,7 +37,7 @@ function Workouts() {
   const params = new URLSearchParams(document.location.search);
   const code = params.get("code");
   const [data, setData] = useState({});
-  const [averagePace = 0, setAveragePace] = useState<number>();
+  const [averagePace, setAveragePace] = useState<number>(0);
   console.log(data);
 
   useEffect(() => {
@@ -57,14 +58,7 @@ function Workouts() {
   return (
     <>
       <div>
-        <div className="card bg-primary text-primary-content w-96">
-          <div className="card-body">
-            <h2 className="card-title">Suggested Workout</h2>
-            <p>
-              Pace: {Math.round(averagePace / 60)}:{Math.floor(averagePace % 60)}
-            </p>
-          </div>
-        </div>
+        <WorkoutCard averagePace={averagePace} />
         <a href="#" target="_blank">
           <img src={sweatSmartLogo} className="logo react" alt="SweatSmartlogo" />
         </a>
