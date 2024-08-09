@@ -1,4 +1,3 @@
-
 import sweatSmartLogo from "/sweatsmart-logo.svg";
 
 function Home() {
@@ -6,11 +5,7 @@ function Home() {
     <>
       <div>
         <a href="#" target="_blank">
-          <img
-            src={sweatSmartLogo}
-            className="logo react"
-            alt="SweatSmartlogo"
-          />
+          <img src={sweatSmartLogo} className="logo react" alt="SweatSmartlogo" />
         </a>
       </div>
       <h1>Welcome to SweatSmart</h1>
