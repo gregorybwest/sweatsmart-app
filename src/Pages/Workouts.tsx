@@ -23,8 +23,9 @@ async function getStravaStats(athlete_id: number, token: string, setAveragePace:
   workoutCalculations(stravaStats.data, setAveragePace);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function workoutCalculations(stravaStats: any, setAveragePace: (pace: number) => void) {
-  let averagePace =
+  const averagePace =
     stravaStats["recent_run_totals"]["elapsed_time"] / (stravaStats["recent_run_totals"]["distance"] / 1609.344);
   console.log(stravaStats["recent_run_totals"]);
   console.log("average pace:", averagePace);
@@ -35,7 +36,7 @@ function Workouts() {
   const params = new URLSearchParams(document.location.search);
   const code = params.get("code");
   const [data, setData] = useState({});
-  const [averagePace, setAveragePace] = useState<number | null>(null);
+  const [averagePace = 0, setAveragePace] = useState<number>();
   console.log(data);
 
   useEffect(() => {
