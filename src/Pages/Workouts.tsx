@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import sweatSmartLogo from "/sweatsmart-logo.svg";
 import axios from "axios";
 import { WorkoutCard } from "../Components/WorkoutCard";
+import { calculateAveragePace } from "../Calculators/Calculators";
 
 async function sendCode(code: string) {
   try {
@@ -21,16 +22,7 @@ async function getStravaStats(athlete_id: number, token: string, setAveragePace:
     },
   });
   console.log(stravaStats.data);
-  workoutCalculations(stravaStats.data, setAveragePace);
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function workoutCalculations(stravaStats: any, setAveragePace: (pace: number) => void) {
-  const averagePace =
-    stravaStats["recent_run_totals"]["elapsed_time"] / (stravaStats["recent_run_totals"]["distance"] / 1609.344);
-  console.log(stravaStats["recent_run_totals"]);
-  console.log("average pace:", averagePace);
-  setAveragePace(averagePace);
+  calculateAveragePace(stravaStats.data, setAveragePace);
 }
 
 function Workouts() {
