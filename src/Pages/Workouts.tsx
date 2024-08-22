@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import sweatSmartLogo from "/sweatsmart-logo.svg";
 import axios from "axios";
-import { WorkoutCard } from "../Components/WorkoutCard";
+import { WorkoutCardList } from "../Components/WorkoutCardList";
+import { calculateAveragePace, calculateAverageWorkoutTime } from "../Calculators/Calculators";
 
 async function sendCode(code: string) {
   try {
@@ -14,23 +15,20 @@ async function sendCode(code: string) {
   }
 }
 
-async function getStravaStats(athlete_id: number, token: string, setAveragePace: (pace: number) => void) {
+async function getStravaStats(
+  athlete_id: number,
+  token: string,
+  setAveragePace: (pace: number) => void,
+  setAverageTime: (time: number) => void
+) {
   const stravaStats = await axios.get(`https://www.strava.com/api/v3/athletes/${athlete_id}/stats`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   console.log(stravaStats.data);
-  workoutCalculations(stravaStats.data, setAveragePace);
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function workoutCalculations(stravaStats: any, setAveragePace: (pace: number) => void) {
-  const averagePace =
-    stravaStats["recent_run_totals"]["elapsed_time"] / (stravaStats["recent_run_totals"]["distance"] / 1609.344);
-  console.log(stravaStats["recent_run_totals"]);
-  console.log("average pace:", averagePace);
-  setAveragePace(averagePace);
+  calculateAveragePace(stravaStats.data, setAveragePace);
+  calculateAverageWorkoutTime(stravaStats.data, setAverageTime);
 }
 
 function Workouts() {
@@ -38,6 +36,7 @@ function Workouts() {
   const code = params.get("code");
   const [data, setData] = useState({});
   const [averagePace, setAveragePace] = useState<number>(0);
+  const [averageTime, setAverageTime] = useState<number>(0);
   console.log(data);
 
   useEffect(() => {
@@ -48,7 +47,7 @@ function Workouts() {
           const athlete_id = result["athlete"]["id"];
           const access_token = result["access_token"];
           localStorage.setItem("refresh_token", result["refresh_token"]);
-          getStravaStats(athlete_id, access_token, setAveragePace);
+          getStravaStats(athlete_id, access_token, setAveragePace, setAverageTime);
         }
       });
     }
@@ -58,7 +57,7 @@ function Workouts() {
   return (
     <>
       <div>
-        <WorkoutCard averagePace={averagePace} />
+        <WorkoutCardList averagePace={averagePace} averageTime={averageTime} />
         <a href="#" target="_blank">
           <img src={sweatSmartLogo} className="logo react" alt="SweatSmartlogo" />
         </a>
