@@ -4,7 +4,6 @@ function Home() {
   return (
     <>
       <div>
-        
         <a href="#" target="_blank">
           <img src={sweatSmartLogo} className="logo react" alt="SweatSmartlogo" />
         </a>
