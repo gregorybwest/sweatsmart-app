@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import sweatSmartLogo from "/sweatsmart-logo.svg";
 import axios from "axios";
 import { WorkoutCardList } from "../Components/WorkoutCardList";
 import { calculateAveragePace, calculateAverageWorkoutTime } from "../Calculators/Calculators";
@@ -79,24 +78,7 @@ function Workouts() {
 
   return (
     <>
-      <div>
-        <WorkoutCardList averagePace={averagePace} averageTime={averageTime} />
-        <a href="#" target="_blank">
-          <img src={sweatSmartLogo} className="logo react" alt="SweatSmartlogo" />
-        </a>
-      </div>
-      <h1>Welcome to Workouts Recommender!</h1>
-      <div className="card">
-        <p>Sup</p>
-        <button
-          id="strava-connect-btn"
-          onClick={async () => {
-            window.location.href = `https://www.strava.com/oauth/authorize?client_id=120918&redirect_uri=${
-              import.meta.env.VITE_REDIRECT_URI
-            }&response_type=code&approval_prompt=auto&scope=activity:write,activity:read`;
-          }}
-        ></button>
-      </div>
+      <WorkoutCardList averagePace={averagePace} averageTime={averageTime} />
     </>
   );
 }

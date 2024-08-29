@@ -2,14 +2,14 @@ import sweatSmartLogo from "/sweatsmart-logo.svg";
 
 function Home() {
   return (
-    <>
+    <div className="flex flex-col justify-center items-center min-h-screen">
       <div>
         <a href="#" target="_blank">
-          <img src={sweatSmartLogo} className="logo react" alt="SweatSmartlogo" />
+          <img src={sweatSmartLogo} className="logo" alt="SweatSmartlogo" />
         </a>
       </div>
       <h1>Welcome to SweatSmart</h1>
-      <div className="card">
+      <div className="">
         <p>Connect to Strava to get started</p>
         <button
           id="strava-connect-btn"
@@ -20,7 +20,7 @@ function Home() {
           }}
         ></button>
       </div>
-    </>
+    </div>
   );
 }
 
