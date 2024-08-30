@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { WorkoutCardList } from "../Components/WorkoutCardList";
 import { calculateAveragePace, calculateAverageWorkoutTime } from "../Calculators/Calculators";
@@ -43,6 +44,7 @@ async function getStravaStats(
 
 function Workouts() {
   const params = new URLSearchParams(document.location.search);
+  const navigate = useNavigate();
   const code = params.get("code");
   const [data, setData] = useState({});
   const [averagePace, setAveragePace] = useState<number>(0);
@@ -79,6 +81,7 @@ function Workouts() {
   return (
     <>
       <WorkoutCardList averagePace={averagePace} averageTime={averageTime} />
+      <button className="btn btn-secondary" onClick={() => {localStorage.clear(); navigate("/");}}>Logout</button>
     </>
   );
 }
