@@ -27,13 +27,14 @@ async function sendRefreshToken(refresh_token: string) {
 
 async function getStravaStats(
   athlete_id: number | string | null,
-  token: string,
+  access_token: string,
   setAveragePace: (pace: number) => void,
   setAverageTime: (time: number) => void
 ) {
-  const stravaStats = await axios.get(`https://www.strava.com/api/v3/athletes/${athlete_id}/stats`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const stravaStats = await axios.get(`https://sweatsmart-be.vercel.app/strava_stats`, {
+    params: {
+      athlete_id: athlete_id,
+      access_token: access_token,
     },
   });
   console.log(stravaStats.data);
