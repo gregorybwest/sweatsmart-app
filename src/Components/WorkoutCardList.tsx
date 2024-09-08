@@ -1,31 +1,17 @@
 import { WorkoutCard } from "./WorkoutCard";
 
 interface WorkoutCardListProps {
-  averagePace: number;
-  averageTime: number;
+  easyRun: object;
+  mediumRun: object;
+  hardRun: object;
 }
 
-export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ averagePace, averageTime }) => {
+export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ easyRun, mediumRun, hardRun }) => {
   return (
     <>
-      <WorkoutCard
-        averagePace={averagePace * 1.05}
-        averageTime={averageTime * 0.8}
-        title="Suggested Easy Workout"
-        className="bg-yellow-500"
-      />
-      <WorkoutCard
-        averagePace={averagePace * 0.95}
-        averageTime={averageTime * 0.92}
-        title="Suggested Medium Workout"
-        className="bg-green-500"
-      />
-      <WorkoutCard
-        averagePace={averagePace * 0.9}
-        averageTime={averageTime * 1.05}
-        title="Suggested Hard Workout"
-        className="bg-red-500"
-      />
+      <WorkoutCard pace={easyRun.pace} time={easyRun.time} title={easyRun.title} className="bg-yellow-500" />
+      <WorkoutCard pace={mediumRun.pace} time={mediumRun.time} title={mediumRun.title} className="bg-green-500" />
+      <WorkoutCard pace={hardRun.pace} time={hardRun.time} title={hardRun.title} className="bg-red-500" />
     </>
   );
 };
