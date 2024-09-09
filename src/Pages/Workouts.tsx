@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { WorkoutCardList } from "../Components/WorkoutCardList";
 
+interface Run {
+  pace: number;
+  time: number;
+  title: string;
+}
+
 const backEndURI = import.meta.env.VITE_BACKEND_URI;
 
 async function sendCode(code: string) {
@@ -27,9 +33,9 @@ async function sendRefreshToken(refresh_token: string) {
 async function getStravaStats(
   athlete_id: number | string | null,
   access_token: string,
-  setEasyRun: (easy: object) => void,
-  setMediumRun: (medium: object) => void,
-  setHardRun: (hard: object) => void
+  setEasyRun: (easy: Run) => void,
+  setMediumRun: (medium: Run) => void,
+  setHardRun: (hard: Run) => void
 ) {
   const stravaStats = await axios.get(`${backEndURI}/strava_stats`, {
     params: {
@@ -47,9 +53,9 @@ function Workouts() {
   const params = new URLSearchParams(document.location.search);
   const code = params.get("code");
   const [data, setData] = useState({});
-  const [easyRun, setEasyRun] = useState<object>({});
-  const [mediumRun, setMediumRun] = useState<object>({});
-  const [hardRun, setHardRun] = useState<object>({});
+  const [easyRun, setEasyRun] = useState<Run>({ pace: 0, time: 0, title: "" });
+  const [mediumRun, setMediumRun] = useState<Run>({ pace: 0, time: 0, title: "" });
+  const [hardRun, setHardRun] = useState<Run>({ pace: 0, time: 0, title: "" });
   console.log(data);
 
   useEffect(() => {

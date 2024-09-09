@@ -1,9 +1,10 @@
 import { WorkoutCard } from "./WorkoutCard";
+import { Run } from "./WorkoutCard";
 
 interface WorkoutCardListProps {
-  easyRun: object;
-  mediumRun: object;
-  hardRun: object;
+  easyRun: Run;
+  mediumRun: Run;
+  hardRun: Run;
 }
 
 export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ easyRun, mediumRun, hardRun }) => {
