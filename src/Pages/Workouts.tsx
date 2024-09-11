@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { WorkoutCardList } from '../Components/WorkoutCardList';
-import { ReactComponent as account_menu_logo } from './account_menu_logo.svg';
+
 
 interface Run {
     pace: number;
