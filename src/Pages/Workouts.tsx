@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { WorkoutCardList } from '../Components/WorkoutCardList';
 
-
 interface Run {
     pace: number;
     time: number;
@@ -148,10 +147,13 @@ function Workouts() {
                                 <ul className='bg-base-100 rounded-t-none p-2'>
                                     <li>
                                         <a
-                onClick={() => {
-                    localStorage.clear();
-                    window.location.href = '/';
-                }}>Logout</a>
+                                            onClick={() => {
+                                                localStorage.clear();
+                                                window.location.href = '/';
+                                            }}
+                                        >
+                                            Logout
+                                        </a>
                                     </li>
                                 </ul>
                             </details>
@@ -164,15 +166,6 @@ function Workouts() {
                 mediumRun={mediumRun}
                 hardRun={hardRun}
             />
-            <button
-                className='btn btn-secondary'
-                onClick={() => {
-                    localStorage.clear();
-                    window.location.href = '/';
-                }}
-            >
-                Logout
-            </button>
         </>
     );
 }
