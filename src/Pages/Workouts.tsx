@@ -138,7 +138,7 @@ function Workouts() {
                                         stroke-width='2'
                                         stroke-linecap='round'
                                         stroke-linejoin='round'
-                                        class='lucide lucide-user h-5 w-5'
+                                        className='lucide lucide-user h-5 w-5'
                                         data-id='8'
                                     >
                                         <path d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2'></path>
