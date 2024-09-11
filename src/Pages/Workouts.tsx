@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { WorkoutCardList } from "../Components/WorkoutCardList";
-import { calculateAveragePace, calculateAverageWorkoutTime } from "../Calculators/Calculators";
+
+interface Run {
+  pace: number;
+  time: number;
+  title: string;
+}
+
+const backEndURI = import.meta.env.VITE_BACKEND_URI;
 
 async function sendCode(code: string) {
   try {
-    const response = await axios.get(`https://sweatsmart-be.vercel.app/strava_auth?code=${code}`);
-    console.log(response.data);
+    const response = await axios.get(`${backEndURI}/strava_auth?code=${code}`);
     return response.data; // Return the data
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -16,8 +22,7 @@ async function sendCode(code: string) {
 
 async function sendRefreshToken(refresh_token: string) {
   try {
-    const response = await axios.get(`https://sweatsmart-be.vercel.app/strava_auth?refresh_token=${refresh_token}`);
-    console.log(response.data);
+    const response = await axios.get(`${backEndURI}/strava_auth?refresh_token=${refresh_token}`);
     return response.data; // Return the data
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -28,26 +33,29 @@ async function sendRefreshToken(refresh_token: string) {
 async function getStravaStats(
   athlete_id: number | string | null,
   access_token: string,
-  setAveragePace: (pace: number) => void,
-  setAverageTime: (time: number) => void
+  setEasyRun: (easy: Run) => void,
+  setMediumRun: (medium: Run) => void,
+  setHardRun: (hard: Run) => void
 ) {
-  const stravaStats = await axios.get(`https://sweatsmart-be.vercel.app/strava_stats`, {
+  const stravaStats = await axios.get(`${backEndURI}/strava_stats`, {
     params: {
       athlete_id: athlete_id,
       access_token: access_token,
     },
   });
-  console.log(stravaStats.data);
-  calculateAveragePace(stravaStats.data, setAveragePace);
-  calculateAverageWorkoutTime(stravaStats.data, setAverageTime);
+  console.log(stravaStats);
+  setEasyRun(stravaStats.data.easy_run);
+  setMediumRun(stravaStats.data.medium_run);
+  setHardRun(stravaStats.data.hard_run);
 }
 
 function Workouts() {
   const params = new URLSearchParams(document.location.search);
   const code = params.get("code");
   const [data, setData] = useState({});
-  const [averagePace, setAveragePace] = useState<number>(0);
-  const [averageTime, setAverageTime] = useState<number>(0);
+  const [easyRun, setEasyRun] = useState<Run>({ pace: 0, time: 0, title: "" });
+  const [mediumRun, setMediumRun] = useState<Run>({ pace: 0, time: 0, title: "" });
+  const [hardRun, setHardRun] = useState<Run>({ pace: 0, time: 0, title: "" });
   console.log(data);
 
   useEffect(() => {
@@ -58,9 +66,8 @@ function Workouts() {
           setData(result); // Set the data state with the fetched result
           const athlete_id = localStorage.getItem("athlete_id");
           const access_token = result["access_token"];
-          getStravaStats(athlete_id, access_token, setAveragePace, setAverageTime);
+          getStravaStats(athlete_id, access_token, setEasyRun, setMediumRun, setHardRun);
         }
-        console.log("result from refresh token", result);
       });
     } else if (code) {
       sendCode(code).then((result) => {
@@ -70,7 +77,7 @@ function Workouts() {
           const access_token = result["access_token"];
           localStorage.setItem("refresh_token", result["refresh_token"]);
           localStorage.setItem("athlete_id", athlete_id);
-          getStravaStats(athlete_id, access_token, setAveragePace, setAverageTime);
+          getStravaStats(athlete_id, access_token, setEasyRun, setMediumRun, setHardRun);
         }
       });
     }
@@ -79,7 +86,7 @@ function Workouts() {
 
   return (
     <>
-      <WorkoutCardList averagePace={averagePace} averageTime={averageTime} />
+      <WorkoutCardList easyRun={easyRun} mediumRun={mediumRun} hardRun={hardRun} />
       <button
         className="btn btn-secondary"
         onClick={() => {
