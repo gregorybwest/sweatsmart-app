@@ -7,20 +7,6 @@ export const NavBar = () => {
         </div>
 
         <div className="flex-none">
-          <div role="tablist" className="tabs tabs-boxed">
-            <a role="tab" className="tab hover:tab-active">
-              Run
-            </a>
-            <a role="tab" className="tab hover:tab-active">
-              Bike
-            </a>
-            <a role="tab" className="tab hover:tab-active">
-              Swim
-            </a>
-          </div>
-        </div>
-
-        <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
               <details>
