@@ -1,33 +1,71 @@
-import { WorkoutCard } from "./WorkoutCard";
-import { Run } from "./WorkoutCard";
+import { WorkoutCard } from './WorkoutCard';
+import { Run } from './WorkoutCard';
 
 interface WorkoutCardListProps {
-  easyRun: Run;
-  mediumRun: Run;
-  hardRun: Run;
+    easyRun: Run;
+    mediumRun: Run;
+    hardRun: Run;
 }
 
-export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ easyRun, mediumRun, hardRun }) => {
-  return (
-    <div className="flex flex-col items-center">
-      <WorkoutCard
-        pace={easyRun.pace}
-        time={easyRun.time}
-        title={easyRun.title}
-        className="bg-gradient-to-b from-yellow-300 to-yellow-600 mb-4 mt-4 transition-transform transform hover:scale-105 hover:z-10 hover:origin-center max-w-screen-lg mx-auto"
-      />
-      <WorkoutCard
-        pace={mediumRun.pace}
-        time={mediumRun.time}
-        title={mediumRun.title}
-        className="bg-gradient-to-b from-green-400 to-green-600 mb-4 transition-transform transform hover:scale-105 hover:z-10 hover:origin-center max-w-screen-lg mx-auto"
-      />
-      <WorkoutCard
-        pace={hardRun.pace}
-        time={hardRun.time}
-        title={hardRun.title}
-        className="bg-gradient-to-b from-red-400 to-red-600 transition-transform transform hover:scale-105 hover:z-10 hover:origin-center max-w-screen-lg mx-auto"
-      />
-    </div>
-  );
+export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
+    easyRun,
+    mediumRun,
+    hardRun,
+}) => {
+    return (
+        <>
+            <div role='tablist' className='tabs tabs-boxed'>
+                <a role='tab' className='tab hover:tab-active'>
+                    Run
+                </a>
+                <a role='tab' className='tab hover:tab-active'>
+                    <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        viewBox='0 0 15 15'
+                        style={{ }}
+                    >
+                        <path
+                            style={{ fill: '#FFFFFF' }}
+                            d='M64 80.085c-3.662 0-6.771-2.598-7.391-6.177a7.327 7.327 0 0 1-.008-2.48 7.387 7.387 0 0 1 2.604-4.501 7.446 7.446 0 0 1 2.157-1.25 7.646 7.646 0 0 1 6.15.394c.738.383 1.41.895 1.987 1.517a7.34 7.34 0 0 1 2.002 5.056c-.001 4.103-3.365 7.441-7.501 7.441zm0-11.905a4.48 4.48 0 0 0-2.873 1.032 4.427 4.427 0 0 0-1.564 4.181A4.483 4.483 0 0 0 64 77.109c2.481 0 4.5-2.002 4.5-4.464 0-1.134-.426-2.21-1.201-3.03a4.349 4.349 0 0 0-1.187-.909A4.463 4.463 0 0 0 64 68.18zm30-12.407c-1.7 0-3.35.238-4.91.685l-2.89-7.652-1.38-3.642-2.15-5.687h6.04c1.85 0 3.35 1.489 3.35 3.325 0 1.826-1.5 3.315-3.35 3.315v2.977c3.5 0 6.35-2.828 6.35-6.292 0-3.473-2.85-6.302-6.35-6.302H78.33l3.28 8.664H51.57l-2.55-5.329c3.28-.149 6.49-.486 6.49-1.25 0-1.558-13.45-1.37-13.45-1.37-.76 0-1.38.615-1.38 1.37 0 .754.62 1.36 1.38 1.36 0 0 1.6.02 3.69-.01l3.18 6.649-6.55 10.262A17.917 17.917 0 0 0 34 54.782c-9.93 0-18 8.009-18 17.864S24.07 90.51 34 90.51c9.41 0 17.16-7.195 17.93-16.345h3.08a8.484 8.484 0 0 1-.13-1.518c0-.496.04-.982.12-1.459h-3.06c-.42-5.19-3.09-9.746-7.03-12.733l5.54-8.694 7.67 16.028a8.935 8.935 0 0 1 2.6-1.508l-7.73-16.137h29.77l.01.03-.01.01-14.67 16.57c.9.466 1.7 1.082 2.38 1.816l13.48-15.224 2.33 6.163C80.2 60.378 76 66.531 76 73.636 76 83.491 84.07 91.5 94 91.5s18-8.009 18-17.864-8.07-17.863-18-17.863zM34 86.538c-7.72 0-14-6.232-14-13.894S26.28 58.75 34 58.75c2.24 0 4.36.526 6.24 1.459l-5.92 9.279c-.08-.02-.17-.02-.25-.02-1.79 0-3.23 1.439-3.23 3.205 0 1.767 1.44 3.206 3.23 3.206a3.23 3.23 0 0 0 2.86-1.717h10.99C47.15 81.109 41.2 86.538 34 86.538zm13.92-15.353H36.79l.07-.119 5.9-9.249a13.839 13.839 0 0 1 5.16 9.368zM94 87.53c-7.72 0-14-6.232-14-13.894 0-5.419 3.14-10.113 7.7-12.405l3.92 10.351c-.49.556-.78 1.29-.78 2.084 0 1.767 1.44 3.206 3.23 3.206 1.78 0 3.23-1.439 3.23-3.206a3.21 3.21 0 0 0-2.9-3.186l-3.9-10.301a14.02 14.02 0 0 1 3.5-.437c7.72 0 14 6.232 14 13.894S101.72 87.53 94 87.53z'
+                        />
+                    </svg>{' '}
+                </a>
+                <a role='tab' className='tab hover:tab-active'>
+                    Swim
+                </a>
+            </div>
+            <div>
+                <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 15 15'
+                    style={{ enableBackground: 'new 0 0 128 128' }}
+                >
+                    <path
+                        style={{ fill: '#FFFFFF' }}
+                        d='M64 80.085c-3.662 0-6.771-2.598-7.391-6.177a7.327 7.327 0 0 1-.008-2.48 7.387 7.387 0 0 1 2.604-4.501 7.446 7.446 0 0 1 2.157-1.25 7.646 7.646 0 0 1 6.15.394c.738.383 1.41.895 1.987 1.517a7.34 7.34 0 0 1 2.002 5.056c-.001 4.103-3.365 7.441-7.501 7.441zm0-11.905a4.48 4.48 0 0 0-2.873 1.032 4.427 4.427 0 0 0-1.564 4.181A4.483 4.483 0 0 0 64 77.109c2.481 0 4.5-2.002 4.5-4.464 0-1.134-.426-2.21-1.201-3.03a4.349 4.349 0 0 0-1.187-.909A4.463 4.463 0 0 0 64 68.18zm30-12.407c-1.7 0-3.35.238-4.91.685l-2.89-7.652-1.38-3.642-2.15-5.687h6.04c1.85 0 3.35 1.489 3.35 3.325 0 1.826-1.5 3.315-3.35 3.315v2.977c3.5 0 6.35-2.828 6.35-6.292 0-3.473-2.85-6.302-6.35-6.302H78.33l3.28 8.664H51.57l-2.55-5.329c3.28-.149 6.49-.486 6.49-1.25 0-1.558-13.45-1.37-13.45-1.37-.76 0-1.38.615-1.38 1.37 0 .754.62 1.36 1.38 1.36 0 0 1.6.02 3.69-.01l3.18 6.649-6.55 10.262A17.917 17.917 0 0 0 34 54.782c-9.93 0-18 8.009-18 17.864S24.07 90.51 34 90.51c9.41 0 17.16-7.195 17.93-16.345h3.08a8.484 8.484 0 0 1-.13-1.518c0-.496.04-.982.12-1.459h-3.06c-.42-5.19-3.09-9.746-7.03-12.733l5.54-8.694 7.67 16.028a8.935 8.935 0 0 1 2.6-1.508l-7.73-16.137h29.77l.01.03-.01.01-14.67 16.57c.9.466 1.7 1.082 2.38 1.816l13.48-15.224 2.33 6.163C80.2 60.378 76 66.531 76 73.636 76 83.491 84.07 91.5 94 91.5s18-8.009 18-17.864-8.07-17.863-18-17.863zM34 86.538c-7.72 0-14-6.232-14-13.894S26.28 58.75 34 58.75c2.24 0 4.36.526 6.24 1.459l-5.92 9.279c-.08-.02-.17-.02-.25-.02-1.79 0-3.23 1.439-3.23 3.205 0 1.767 1.44 3.206 3.23 3.206a3.23 3.23 0 0 0 2.86-1.717h10.99C47.15 81.109 41.2 86.538 34 86.538zm13.92-15.353H36.79l.07-.119 5.9-9.249a13.839 13.839 0 0 1 5.16 9.368zM94 87.53c-7.72 0-14-6.232-14-13.894 0-5.419 3.14-10.113 7.7-12.405l3.92 10.351c-.49.556-.78 1.29-.78 2.084 0 1.767 1.44 3.206 3.23 3.206 1.78 0 3.23-1.439 3.23-3.206a3.21 3.21 0 0 0-2.9-3.186l-3.9-10.301a14.02 14.02 0 0 1 3.5-.437c7.72 0 14 6.232 14 13.894S101.72 87.53 94 87.53z'
+                    />
+                </svg>{' '}
+            </div>
+            <div className='flex flex-col items-center'>
+                <WorkoutCard
+                    pace={easyRun.pace}
+                    time={easyRun.time}
+                    title={easyRun.title}
+                    className='bg-gradient-to-b from-yellow-300 to-yellow-600 mb-4 mt-4 transition-transform transform hover:scale-105 hover:z-10 hover:origin-center max-w-screen-lg mx-auto'
+                />
+                <WorkoutCard
+                    pace={mediumRun.pace}
+                    time={mediumRun.time}
+                    title={mediumRun.title}
+                    className='bg-gradient-to-b from-green-400 to-green-600 mb-4 transition-transform transform hover:scale-105 hover:z-10 hover:origin-center max-w-screen-lg mx-auto'
+                />
+                <WorkoutCard
+                    pace={hardRun.pace}
+                    time={hardRun.time}
+                    title={hardRun.title}
+                    className='bg-gradient-to-b from-red-400 to-red-600 transition-transform transform hover:scale-105 hover:z-10 hover:origin-center max-w-screen-lg mx-auto'
+                />
+            </div>
+        </>
+    );
 };
