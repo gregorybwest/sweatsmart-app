@@ -30,7 +30,7 @@ export const NavBar = () =>{
                                         <circle cx='12' cy='7' r='4'></circle>
                                     </svg>
                                 </summary>
-                                <ul className='bg-base-100 rounded-t-none p-2'>
+                                <ul className='bg-base-100 rounded-t-none p-2 z-50'>
                                     <li>
                                         <a
                                             onClick={() => {
