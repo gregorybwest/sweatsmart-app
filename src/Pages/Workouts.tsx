@@ -7,6 +7,7 @@ interface Run {
   pace: number;
   time: number;
   title: string;
+  suggested: boolean;
 }
 
 const backEndURI = import.meta.env.VITE_BACKEND_URI;
@@ -45,9 +46,9 @@ async function getStravaStats(
     },
   });
   console.log(stravaStats);
-  setEasyRun(stravaStats.data.easy_run);
-  setMediumRun(stravaStats.data.medium_run);
-  setHardRun(stravaStats.data.hard_run);
+  setEasyRun(stravaStats.data.suggested_workouts.suggested_runs.easy_run);
+  setMediumRun(stravaStats.data.suggested_workouts.suggested_runs.medium_run);
+  setHardRun(stravaStats.data.suggested_workouts.suggested_runs.hard_run);
 }
 
 function Workouts() {
@@ -58,16 +59,19 @@ function Workouts() {
     pace: 0,
     time: 0,
     title: "",
+    suggested: false,
   });
   const [mediumRun, setMediumRun] = useState<Run>({
     pace: 0,
     time: 0,
     title: "",
+    suggested: false,
   });
   const [hardRun, setHardRun] = useState<Run>({
     pace: 0,
     time: 0,
     title: "",
+    suggested: false,
   });
   console.log(data);
 
