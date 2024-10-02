@@ -2,9 +2,6 @@ import { WorkoutCard } from './WorkoutCard';
 import { Run } from './WorkoutCard';
 
 interface WorkoutCardListProps {
-    easyRun: Run;
-    mediumRun: Run;
-    hardRun: Run;
     suggestedRuns: {
         message: string;
         easyRun: Run;
@@ -14,9 +11,6 @@ interface WorkoutCardListProps {
 }
 
 export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
-    easyRun,
-    mediumRun,
-    hardRun,
     suggestedRuns,
 }) => {
     return (
@@ -25,6 +19,7 @@ export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({
           <div>{suggestedRuns.message}</div>
         ) : (
           <div className='flex flex-col items-center'>
+
             <WorkoutCard
               pace={suggestedRuns.easyRun?.pace}
               time={suggestedRuns.easyRun?.time}

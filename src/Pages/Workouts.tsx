@@ -31,7 +31,7 @@ async function sendCode(code: string) {
 
 async function sendRefreshToken(refreshToken: string) {
   try {
-    const response = await axios.get(`${backEndURI}/strava_auth?refresh_token=${refreshToken}`);
+    const response = await axios.get(`${backEndURI}/strava_auth?refreshToken=${refreshToken}`);
     return response.data; // Return the data
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -42,9 +42,6 @@ async function sendRefreshToken(refreshToken: string) {
 async function getStravaStats(
   athleteId: number | string | null,
   accessToken: string,
-  setEasyRun: (easy: Run) => void,
-  setMediumRun: (medium: Run) => void,
-  setHardRun: (hard: Run) => void,
   setSuggestedRuns: (suggested: SuggestedRuns) => void
 ) {
   const stravaStats = await axios.get(`${backEndURI}/strava_stats`, {
@@ -54,9 +51,6 @@ async function getStravaStats(
     },
   });
   console.log("Strava stats", stravaStats);
-  setEasyRun(stravaStats.data.suggested_workouts.suggested_runs.easy_run);
-  setMediumRun(stravaStats.data.suggested_workouts.suggested_runs.medium_run);
-  setHardRun(stravaStats.data.suggested_workouts.suggested_runs.hard_run);
   setSuggestedRuns(stravaStats.data.suggestedWorkouts.suggestedRuns);
 }
 
@@ -85,24 +79,6 @@ function Workouts() {
       suggested: false,
     },
   });
-  const [easyRun, setEasyRun] = useState<Run>({
-    pace: 0,
-    time: 0,
-    title: "",
-    suggested: false,
-  });
-  const [mediumRun, setMediumRun] = useState<Run>({
-    pace: 0,
-    time: 0,
-    title: "",
-    suggested: false,
-  });
-  const [hardRun, setHardRun] = useState<Run>({
-    pace: 0,
-    time: 0,
-    title: "",
-    suggested: false,
-  });
   console.log(data);
 
   useEffect(() => {
@@ -113,7 +89,7 @@ function Workouts() {
           setData(result); // Set the data state with the fetched result
           const athleteId = localStorage.getItem("athleteId");
           const accessToken = result["accessToken"];
-          getStravaStats(athleteId, accessToken, setEasyRun, setMediumRun, setHardRun, setSuggestedRuns);
+          getStravaStats(athleteId, accessToken, setSuggestedRuns);
         }
       });
     } else if (code) {
@@ -124,7 +100,7 @@ function Workouts() {
           const accessToken = result["accessToken"];
           localStorage.setItem("refreshToken", result["refreshToken"]);
           localStorage.setItem("athleteId", athleteId);
-          getStravaStats(athleteId, accessToken, setEasyRun, setMediumRun, setHardRun, setSuggestedRuns);
+          getStravaStats(athleteId, accessToken, setSuggestedRuns);
         }
       });
     }
@@ -147,7 +123,7 @@ function Workouts() {
           </a>
         </div>
       </div>
-      <WorkoutCardList easyRun={easyRun} mediumRun={mediumRun} hardRun={hardRun} suggestedRuns={suggestedRuns} />
+      <WorkoutCardList suggestedRuns={suggestedRuns} />
     </>
   );
 }

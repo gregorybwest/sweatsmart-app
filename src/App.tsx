@@ -4,12 +4,12 @@ import Home from "./Pages/Home";
 import Workouts from "./Pages/Workouts";
 
 function App() {
-  const refresh_token = localStorage.getItem("refresh_token");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={refresh_token ? <Navigate to="/workouts" /> : <Home />} />
+        <Route path="/" element={refreshToken ? <Navigate to="/workouts" /> : <Home />} />
         <Route path="/workouts" element={<Workouts />} />
       </Routes>
     </BrowserRouter>
