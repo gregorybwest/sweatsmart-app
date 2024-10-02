@@ -11,10 +11,10 @@ interface Run {
 }
 
 interface SuggestedRuns {
-    message: string;
-    easyRun: Run;
-    mediumRun: Run;
-    hardRun: Run;
+  message: string;
+  easyRun: Run;
+  mediumRun: Run;
+  hardRun: Run;
 }
 
 const backEndURI = import.meta.env.VITE_BACKEND_URI;
@@ -29,9 +29,9 @@ async function sendCode(code: string) {
   }
 }
 
-async function sendRefreshToken(refresh_token: string) {
+async function sendRefreshToken(refreshToken: string) {
   try {
-    const response = await axios.get(`${backEndURI}/strava_auth?refresh_token=${refresh_token}`);
+    const response = await axios.get(`${backEndURI}/strava_auth?refresh_token=${refreshToken}`);
     return response.data; // Return the data
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -40,8 +40,8 @@ async function sendRefreshToken(refresh_token: string) {
 }
 
 async function getStravaStats(
-  athlete_id: number | string | null,
-  access_token: string,
+  athleteId: number | string | null,
+  accessToken: string,
   setEasyRun: (easy: Run) => void,
   setMediumRun: (medium: Run) => void,
   setHardRun: (hard: Run) => void,
@@ -49,15 +49,15 @@ async function getStravaStats(
 ) {
   const stravaStats = await axios.get(`${backEndURI}/strava_stats`, {
     params: {
-      athlete_id: athlete_id,
-      access_token: access_token,
+      athleteId: athleteId,
+      accessToken: accessToken,
     },
   });
-  console.log('Strava stats', stravaStats);
+  console.log("Strava stats", stravaStats);
   setEasyRun(stravaStats.data.suggested_workouts.suggested_runs.easy_run);
   setMediumRun(stravaStats.data.suggested_workouts.suggested_runs.medium_run);
   setHardRun(stravaStats.data.suggested_workouts.suggested_runs.hard_run);
-  setSuggestedRuns(stravaStats.data.suggested_workouts.suggested_runs);
+  setSuggestedRuns(stravaStats.data.suggestedWorkouts.suggestedRuns);
 }
 
 function Workouts() {
@@ -66,19 +66,19 @@ function Workouts() {
   const [data, setData] = useState({});
   const [suggestedRuns, setSuggestedRuns] = useState<SuggestedRuns>({
     message: "",
-    easy_run: {
+    easyRun: {
       pace: 0,
       time: 0,
       title: "",
       suggested: false,
     },
-    medium_run: {
+    mediumRun: {
       pace: 0,
       time: 0,
       title: "",
       suggested: false,
     },
-    hard_run: {
+    hardRun: {
       pace: 0,
       time: 0,
       title: "",
@@ -106,28 +106,28 @@ function Workouts() {
   console.log(data);
 
   useEffect(() => {
-    const refresh_token = localStorage.getItem("refresh_token");
-    if (refresh_token) {
-      sendRefreshToken(refresh_token).then((result) => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      sendRefreshToken(refreshToken).then((result) => {
         if (result) {
           setData(result); // Set the data state with the fetched result
-          const athlete_id = localStorage.getItem("athlete_id");
-          const access_token = result["access_token"];
-          getStravaStats(athlete_id, access_token, setEasyRun, setMediumRun, setHardRun, setSuggestedRuns);
+          const athleteId = localStorage.getItem("athleteId");
+          const accessToken = result["accessToken"];
+          getStravaStats(athleteId, accessToken, setEasyRun, setMediumRun, setHardRun, setSuggestedRuns);
         }
       });
     } else if (code) {
       sendCode(code).then((result) => {
         if (result) {
           setData(result); // Set the data state with the fetched result
-          const athlete_id = result["athlete"]["id"];
-          const access_token = result["access_token"];
-          localStorage.setItem("refresh_token", result["refresh_token"]);
-          localStorage.setItem("athlete_id", athlete_id);
-          getStravaStats(athlete_id, access_token, setEasyRun, setMediumRun, setHardRun, setSuggestedRuns);
+          const athleteId = result["athlete"]["id"];
+          const accessToken = result["accessToken"];
+          localStorage.setItem("refreshToken", result["refreshToken"]);
+          localStorage.setItem("athleteId", athleteId);
+          getStravaStats(athleteId, accessToken, setEasyRun, setMediumRun, setHardRun, setSuggestedRuns);
         }
       });
-    } 
+    }
     // getStravaStats(data);
   }, [code]); // Only depend on `code`
 
