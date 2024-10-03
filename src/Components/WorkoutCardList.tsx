@@ -1,8 +1,15 @@
 import { WorkoutCard } from "./WorkoutCard";
-import { Run } from "./WorkoutCard";
+import { Run } from "../Pages/Workouts";
 
 interface WorkoutCardListProps {
   runs: Run[];
+}
+
+const difficultyColors: { [key: string]: string } = {
+  easy: "bg-green-100 border-green-300 text-green-800",
+  medium: "bg-yellow-100 border-yellow-300 text-yellow-800",
+  hard: "bg-red-100 border-red-300 text-red-800",
+  featured: "bg-purple-600 border-purple-800 text-white",
 }
 
 export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ runs }) => {
@@ -11,15 +18,15 @@ export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ runs }) => {
     <>
       {!runs ? (
         <div>Loading</div>
-      ) : typeof runs === "string" ? (
-        <div>{runs}</div>
+      ) : typeof(runs[0]) === 'string' ? (
+        <div>{runs[0]}</div>
       ) : (
         <div className="flex flex-col items-center">
           <WorkoutCard
             pace={runs[0]?.pace}
             time={runs[0]?.time}
             title={runs[0]?.title}
-            className="bg-gradient-to-b from-yellow-300 to-yellow-600 mb-4 mt-4 transition-transform transform hover:z-10 hover:origin-center max-w-screen-lg mx-auto"
+            className={`${difficultyColors[runs[0].difficulty]} mb-4 mt-4 transition-transform transform hover:z-10 hover:origin-center max-w-screen-lg mx-auto`}
           />
           <WorkoutCard
             pace={runs[1]?.pace}

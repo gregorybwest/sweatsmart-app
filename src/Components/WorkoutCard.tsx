@@ -1,8 +1,3 @@
-export interface Run {
-  pace: number;
-  time: number;
-  title: string;
-}
 interface WorkoutCardProps {
   pace: number;
   time: number;
