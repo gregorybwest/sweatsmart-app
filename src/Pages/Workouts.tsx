@@ -3,7 +3,7 @@ import axios from "axios";
 import { WorkoutCardList } from "../Components/WorkoutCardList";
 import { NavBar } from "../Components/NavBar";
 
-interface Run {
+export interface Run {
   pace: number;
   time: number;
   title: string;
