@@ -25,6 +25,7 @@ export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ workouts }) =>
             <WorkoutCard
               key={index}
               pace={workout.pace}
+              paceUnit={workout.paceUnit}
               time={workout.time}
               title={workout.title}
               className={`${
