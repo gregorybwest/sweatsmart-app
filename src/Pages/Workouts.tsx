@@ -5,6 +5,7 @@ import { NavBar } from "../Components/NavBar";
 
 export interface Run {
   pace: number;
+  paceUnit: string;
   time: number;
   title: string;
   suggested: boolean;
@@ -13,6 +14,7 @@ export interface Run {
 
 export interface Ride {
   pace: number;
+  paceUnit: string;
   time: number;
   title: string;
   suggested: boolean;
@@ -21,6 +23,7 @@ export interface Ride {
 
 export interface Swim {
   pace: number;
+  paceUnit: string;
   time: number;
   title: string;
   suggested: boolean;
