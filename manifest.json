@@ -1,0 +1,17 @@
+{
+    "lang": "en-us",
+    "name": "Sweatsmart App",
+    "short_name": "Sweatsmart",
+    "description": "A simple workout recommendation app",
+    "start_url": "/Workouts",
+    "background_color": "#2f3d58",
+    "theme_color": "#011845",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "./public/SweatSmartLogo512.png",
+            "sizes": "512x512"
+        }
+    ]
+}
