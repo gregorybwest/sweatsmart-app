@@ -105,25 +105,25 @@ function Workouts() {
   return (
     <>
       <NavBar />
-      <div className="flex-none">
-        <div role="tablist" className="tabs tabs-boxed">
+      <div className="flex justify-center">
+        <div role="tablist" className="tabs tabs-boxed inline-flex">
           <a
             role="tab"
-            className={`tab hover:tab-active ${activeTab === "run" ? "tab-active" : ""}`}
+            className={`tab text-lg px-8 ${activeTab === "run" ? "tab-active" : ""}`}
             onClick={() => setActiveTab("run")}
           >
             Run
           </a>
           <a
             role="tab"
-            className={`tab hover:tab-active ${activeTab === "bike" ? "tab-active" : ""}`}
+            className={`tab text-lg px-8 ${activeTab === "bike" ? "tab-active" : ""}`}
             onClick={() => setActiveTab("bike")}
           >
             Bike
           </a>
           <a
             role="tab"
-            className={`tab hover:tab-active ${activeTab === "swim" ? "tab-active" : ""}`}
+            className={`tab text-lg px-8 ${activeTab === "swim" ? "tab-active" : ""}`}
             onClick={() => setActiveTab("swim")}
           >
             Swim

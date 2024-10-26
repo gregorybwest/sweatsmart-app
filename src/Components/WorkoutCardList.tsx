@@ -18,7 +18,7 @@ export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ workouts }) =>
       {workouts.length === 0 ? (
         <div>Loading</div>
       ) : typeof workouts[0] === "string" ? (
-        <div>{workouts[0]}</div>
+        <div className="flex text-lg px-4 p-4 justify-center">{workouts[0]}</div>
       ) : (
         <div className="flex flex-col items-center">
           {workouts.map((workout, index) => (
