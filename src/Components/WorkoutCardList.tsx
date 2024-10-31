@@ -13,6 +13,7 @@ const difficultyColors: { [key: string]: string } = {
 };
 
 export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ workouts }) => {
+  console.log(workouts);
   return (
     <>
       {workouts.length === 0 ? (
@@ -24,6 +25,7 @@ export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ workouts }) =>
           {workouts.map((workout, index) => (
             <WorkoutCard
               key={index}
+              workoutPlan={workout.workoutPlan}
               pace={workout.pace}
               paceUnit={workout.paceUnit}
               time={workout.time}

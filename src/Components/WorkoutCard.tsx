@@ -1,4 +1,5 @@
 interface WorkoutCardProps {
+  workoutPlan: string;
   pace: number;
   paceUnit: string;
   time: number;
@@ -6,7 +7,7 @@ interface WorkoutCardProps {
   title: string;
 }
 
-export const WorkoutCard: React.FC<WorkoutCardProps> = ({ pace, paceUnit, time, className, title }) => {
+export const WorkoutCard: React.FC<WorkoutCardProps> = ({ workoutPlan, pace, paceUnit, time, className, title }) => {
   return (
     <div className={`card text-primary-content w-96 rounded-lg shadow-lg w-full ${className}`}>
       <div className="card-body">
@@ -15,6 +16,7 @@ export const WorkoutCard: React.FC<WorkoutCardProps> = ({ pace, paceUnit, time, 
           Pace: {pace} {paceUnit}
         </p>
         <p>Average Time: {Math.floor(time / 60)}:00</p>
+        <p>{workoutPlan}</p>
       </div>
     </div>
   );

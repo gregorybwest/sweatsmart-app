@@ -4,6 +4,7 @@ import { WorkoutCardList } from "../Components/WorkoutCardList";
 import { NavBar } from "../Components/NavBar";
 
 export interface Run {
+  workoutPlan: string;
   pace: number;
   paceUnit: string;
   time: number;
@@ -13,6 +14,7 @@ export interface Run {
 }
 
 export interface Ride {
+  workoutPlan: string;
   pace: number;
   paceUnit: string;
   time: number;
@@ -22,6 +24,7 @@ export interface Ride {
 }
 
 export interface Swim {
+  workoutPlan: string;
   pace: number;
   paceUnit: string;
   time: number;
