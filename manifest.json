@@ -10,7 +10,7 @@
     "display": "standalone",
     "icons": [
         {
-            "src": "./SweatSmartLogo512.png",
+            "src": "./SweatSmartLogo.png",
             "sizes": "512x512"
         }
     ]
