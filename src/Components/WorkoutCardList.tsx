@@ -30,8 +30,9 @@ export const WorkoutCardList: React.FC<WorkoutCardListProps> = ({ workouts }) =>
               paceUnit={workout.paceUnit}
               time={workout.time}
               title={workout.title}
+              suggested={workout.suggested}
               className={`${
-                difficultyColors[workout.difficulty]
+                workout.suggested ? difficultyColors['featured']: difficultyColors[workout.difficulty]
               } mb-4 mt-4 transition-transform transform hover:z-10 hover:origin-center max-w-screen-lg mx-auto`}
             />
           ))}
