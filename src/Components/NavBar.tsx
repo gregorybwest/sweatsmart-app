@@ -7,7 +7,7 @@ export const NavBar = () => {
         </div>
 
         <div className="flex-none">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-2">
             <li>
               <details>
                 <summary>
@@ -28,7 +28,7 @@ export const NavBar = () => {
                     <circle cx="12" cy="7" r="4"></circle>
                   </svg>
                 </summary>
-                <ul className="bg-base-100 rounded-t-none p-2 z-50">
+                <ul className="">
                   <li>
                     <a
                       onClick={() => {
@@ -37,6 +37,20 @@ export const NavBar = () => {
                       }}
                     >
                       Logout
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() => {
+                        if (localStorage.getItem("unit") === "standard") {
+                          localStorage.setItem("unit", "metric");
+                        } else {
+                          localStorage.setItem("unit", "standard");
+                        }
+                        window.location.reload();
+                      }}
+                    >
+                      Standard/Metric
                     </a>
                   </li>
                 </ul>
