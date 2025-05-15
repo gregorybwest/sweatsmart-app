@@ -122,10 +122,10 @@ function Workouts() {
           </a>
           <a
             role="tab"
-            className={`tab text-lg px-8 ${activeTab === "Bike" ? "tab-active" : ""}`}
-            onClick={() => setActiveTab("Bike")}
+            className={`tab text-lg px-8 ${activeTab === "Ride" ? "tab-active" : ""}`}
+            onClick={() => setActiveTab("Ride")}
           >
-            Bike
+            Ride
           </a>
           <a
             role="tab"
@@ -139,7 +139,7 @@ function Workouts() {
 
       {/* Conditionally pass workouts based on activeTab */}
       {activeTab === "Run" && <WorkoutCardList workouts={runs} />}
-      {activeTab === "Bike" && <WorkoutCardList workouts={rides} />}
+      {activeTab === "Ride" && <WorkoutCardList workouts={rides} />}
       {activeTab === "Swim" && <WorkoutCardList workouts={swims} />}
     </>
   );
