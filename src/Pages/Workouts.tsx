@@ -60,7 +60,8 @@ async function getStravaStats(
   accessToken: string,
   setRuns: (runs: Run[]) => void,
   setRides: (rides: Ride[]) => void,
-  setSwims: (swims: Swim[]) => void
+  setSwims: (swims: Swim[]) => void,
+  setActiveTab: (activeTab: string) => void
 ) {
   const stravaStats = await axios.get(`${backEndURI}/strava_stats`, {
     params: {
@@ -68,6 +69,8 @@ async function getStravaStats(
       accessToken: accessToken,
     },
   });
+  console.log(stravaStats.data.recentWorkoutType);
+  setActiveTab(stravaStats.data.recentWorkoutType);
   setRuns(stravaStats.data.workouts.runs);
   setRides(stravaStats.data.workouts.rides);
   setSwims(stravaStats.data.workouts.swims);
@@ -79,7 +82,7 @@ function Workouts() {
   const [runs, setRuns] = useState<Run[]>([]);
   const [rides, setRides] = useState<Ride[]>([]);
   const [swims, setSwims] = useState<Swim[]>([]);
-  const [activeTab, setActiveTab] = useState("run");
+  const [activeTab, setActiveTab] = useState<string>("run");
 
   useEffect(() => {
     const refreshToken = localStorage.getItem("refreshToken");
@@ -88,7 +91,7 @@ function Workouts() {
         if (result) {
           const athleteId = localStorage.getItem("athleteId");
           const accessToken = result["accessToken"];
-          getStravaStats(athleteId, accessToken, setRuns, setRides, setSwims);
+          getStravaStats(athleteId, accessToken, setRuns, setRides, setSwims, setActiveTab);
         }
       });
     } else if (code) {
@@ -98,7 +101,7 @@ function Workouts() {
           const accessToken = result["accessToken"];
           localStorage.setItem("refreshToken", result["refreshToken"]);
           localStorage.setItem("athleteId", athleteId);
-          getStravaStats(athleteId, accessToken, setRuns, setRides, setSwims);
+          getStravaStats(athleteId, accessToken, setRuns, setRides, setSwims, setActiveTab);
         }
       });
     }
@@ -112,22 +115,22 @@ function Workouts() {
         <div role="tablist" className="tabs tabs-boxed inline-flex">
           <a
             role="tab"
-            className={`tab text-lg px-8 ${activeTab === "run" ? "tab-active" : ""}`}
-            onClick={() => setActiveTab("run")}
+            className={`tab text-lg px-8 ${activeTab === "Run" ? "tab-active" : ""}`}
+            onClick={() => setActiveTab("Run")}
           >
             Run
           </a>
           <a
             role="tab"
-            className={`tab text-lg px-8 ${activeTab === "bike" ? "tab-active" : ""}`}
-            onClick={() => setActiveTab("bike")}
+            className={`tab text-lg px-8 ${activeTab === "Bike" ? "tab-active" : ""}`}
+            onClick={() => setActiveTab("Bike")}
           >
             Bike
           </a>
           <a
             role="tab"
-            className={`tab text-lg px-8 ${activeTab === "swim" ? "tab-active" : ""}`}
-            onClick={() => setActiveTab("swim")}
+            className={`tab text-lg px-8 ${activeTab === "Swim" ? "tab-active" : ""}`}
+            onClick={() => setActiveTab("Swim")}
           >
             Swim
           </a>
@@ -135,9 +138,9 @@ function Workouts() {
       </div>
 
       {/* Conditionally pass workouts based on activeTab */}
-      {activeTab === "run" && <WorkoutCardList workouts={runs} />}
-      {activeTab === "bike" && <WorkoutCardList workouts={rides} />}
-      {activeTab === "swim" && <WorkoutCardList workouts={swims} />}
+      {activeTab === "Run" && <WorkoutCardList workouts={runs} />}
+      {activeTab === "Bike" && <WorkoutCardList workouts={rides} />}
+      {activeTab === "Swim" && <WorkoutCardList workouts={swims} />}
     </>
   );
 }
