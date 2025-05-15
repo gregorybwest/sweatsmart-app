@@ -82,7 +82,7 @@ function Workouts() {
   const [runs, setRuns] = useState<Run[]>([]);
   const [rides, setRides] = useState<Ride[]>([]);
   const [swims, setSwims] = useState<Swim[]>([]);
-  const [activeTab, setActiveTab] = useState<string>("run");
+  const [activeTab, setActiveTab] = useState<string>("Run");
 
   useEffect(() => {
     const refreshToken = localStorage.getItem("refreshToken");
